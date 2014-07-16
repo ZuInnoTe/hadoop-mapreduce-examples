@@ -23,7 +23,8 @@ Run on Hadoop
 You should have Hadoop installed locally, run it on a cluster or leverage a cloud service, such as Amazon EMR, Google Compute or Microsoft Azure.
 
 
-Wordcount:
+Wordcount
+=========
 You will need to create some basic input files:
 
 echo "Hallo Hadoop Test Hadoop Test" > input
@@ -42,7 +43,8 @@ After some time you will see that the job successfully finished. You can see the
 
 hadoop -fs cat /tmp/output/part-r-00000
 
-Tweetcount:
+Tweetcount
+=========
 You will need to create some basic input files with tweets. You can either simply use JSONObjects:
 
 echo "{\"name\":\"1\"}" > inputtweet
