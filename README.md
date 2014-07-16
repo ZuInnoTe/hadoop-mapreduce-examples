@@ -63,4 +63,4 @@ hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.MyDriver /tmp/
 
 After some time you will see that the job successfully finished. You can see the output by using the following command:
 
-hadoop -fs cat /tmp/output/part-r-00000
+hadoop -fs cat /tmp/outputtweet/part-r-00000
