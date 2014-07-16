@@ -29,6 +29,8 @@ options.forkOptions.executable = "/usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/java
 jar {
     baseName = 'example-hadoop'
     version = '0.1.0'
+   // note this builds one fat jar and it is not recommended for production use - just for illustration purpose
+   from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
 
@@ -38,6 +40,8 @@ dependencies {
      compile("org.apache.hadoop:hadoop-client:2.2.0")
     // hadoop common for map/reduce task
    compile("org.apache.hadoop:hadoop-common:2.2.0")
+    // json library for tweets
+    compile("com.google.code.gson:gson:2.2.4")
     // testing
     testCompile("junit:junit:4.11")
 }
