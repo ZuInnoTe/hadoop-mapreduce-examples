@@ -37,7 +37,7 @@ hadoop -copyFromLocal ./input /tmp
 
 Execute in the command line the following command:
 
-hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.MyDriver /tmp/input /tmp/output
+hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.WordCount.MyDriver /tmp/input /tmp/output
 
 After some time you will see that the job successfully finished. You can see the output by using the following command:
 
@@ -59,7 +59,7 @@ hadoop -copyFromLocal ./inputtweet /tmp
 
 Execute in the command line the following command:
 
-hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.MyDriver /tmp/inputtweet /tmp/outputtweet
+hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.TweetCount.MyTweetDriver /tmp/inputtweet /tmp/outputtweet
 
 After some time you will see that the job successfully finished. You can see the output by using the following command:
 
