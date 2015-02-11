@@ -18,13 +18,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-compileJava {
-       
 
-options.fork = true
-options.forkOptions.executable = "/usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/javac"
-   }
-
+sourceCompatibility = 1.7
 
 jar {
     baseName = 'example-hadoop'
@@ -37,9 +32,9 @@ jar {
 
 dependencies {
     // hadoop lib for driver
-     compile("org.apache.hadoop:hadoop-client:2.2.0")
+     compile("org.apache.hadoop:hadoop-client:2.5.0")
     // hadoop common for map/reduce task
-   compile("org.apache.hadoop:hadoop-common:2.2.0")
+   compile("org.apache.hadoop:hadoop-common:2.5.0")
     // json library for tweets
     compile("com.google.code.gson:gson:2.2.4")
     // testing
