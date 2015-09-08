@@ -19,7 +19,7 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 
 jar {
     baseName = 'example-hadoop'
@@ -32,9 +32,9 @@ jar {
 
 dependencies {
     // hadoop lib for driver
-     compile("org.apache.hadoop:hadoop-client:2.5.0")
+     compile("org.apache.hadoop:hadoop-client:2.7.0")
     // hadoop common for map/reduce task
-   compile("org.apache.hadoop:hadoop-common:2.5.0")
+   compile("org.apache.hadoop:hadoop-common:2.7.0")
     // json library for tweets
     compile("com.google.code.gson:gson:2.2.4")
     // testing
