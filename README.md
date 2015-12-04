@@ -23,26 +23,28 @@ Run on Hadoop
 You should have Hadoop installed locally, run it on a cluster or leverage a cloud service, such as Amazon EMR, Google Compute or Microsoft Azure.
 
 
-Wordcount:
+Wordcount
+=========
 You will need to create some basic input files:
 
 echo "Hallo Hadoop Test Hadoop Test" > input
 
 Afterwards you need to copy it to the HDFS filesystem:
 
-hadoop -fs mkdir /tmp
+hadoop fs -mkdir /tmp
 
-hadoop -copyFromLocal ./input /tmp
+hadoop fs -copyFromLocal ./input /tmp
 
 Execute in the command line the following command:
 
-hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.MyDriver /tmp/input /tmp/output
+hadoop jar build/libs/example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.WordCount.MyDriver /tmp/input /tmp/output
 
 After some time you will see that the job successfully finished. You can see the output by using the following command:
 
-hadoop -fs cat /tmp/output/part-r-00000
+hadoop fs -cat /tmp/output/part-r-00000
 
-Tweetcount:
+Tweetcount
+=========
 You will need to create some basic input files with tweets. You can either simply use JSONObjects:
 
 echo "{\"name\":\"1\"}" > inputtweet
@@ -51,14 +53,14 @@ or you copy real tweets in JSON format into the file inputtweet. You can use the
 
 Afterwards you need to copy it to the HDFS filesystem:
 
-hadoop -fs mkdir /tmp
+hadoop fs -mkdir /tmp
 
-hadoop -copyFromLocal ./inputtweet /tmp
+hadoop fs -copyFromLocal ./inputtweet /tmp
 
 Execute in the command line the following command:
 
-hadoop jar example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.MyDriver /tmp/inputtweet /tmp/outputtweet
+hadoop jar build/libs/example-hadoop-0.1.0.jar org.zuinnote.examplemapreduce.TweetCount.MyTweetDriver /tmp/inputtweet /tmp/outputtweet
 
 After some time you will see that the job successfully finished. You can see the output by using the following command:
 
-hadoop -fs cat /tmp/output/part-r-00000
+hadoop fs -cat /tmp/outputtweet/part-r-00000
