@@ -1,50 +1,51 @@
-buildscript {
-    repositories {
-	mavenCentral()
-        mavenLocal()
-    }
-    dependencies {
-    }
-}
-
-
-
-repositories {
-    mavenCentral()
-}
-
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
-
-compileJava {
-       
-
-options.fork = true
-options.forkOptions.executable = "/usr/lib/jvm/java-1.7.0-openjdk-amd64/bin/javac"
-   }
+apply plugin: 'application'
 
 
+sourceCompatibility = 1.8
+version = '1.0'
 jar {
+    manifest {
+        attributes 'Implementation-Title': 'Example MapReduce using Gradle', 'Implementation-Version': version
+    }
+ 
     baseName = 'example-hadoop'
     version = '0.1.0'
    // note this builds one fat jar and it is not recommended for production use - just for illustration purpose
    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
-
-
-dependencies {
-    // hadoop lib for driver
-     compile("org.apache.hadoop:hadoop-client:2.2.0")
-    // hadoop common for map/reduce task
-   compile("org.apache.hadoop:hadoop-common:2.2.0")
-    // json library for tweets
-    compile("com.google.code.gson:gson:2.2.4")
-    // testing
-    testCompile("junit:junit:4.11")
+repositories {
+    mavenCentral()
 }
 
 
+configurations {
+	provided
+}
 
+sourceSets {
+    main.compileClasspath += configurations.provided
+    test.compileClasspath += configurations.provided
+    test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+   // hadoop lib for driver
+     provided("org.apache.hadoop:hadoop-client:2.7.1")
+    // hadoop common for map/reduce task
+   provided("org.apache.hadoop:hadoop-common:2.7.1")
+    // json library for tweets
+    compile("com.google.code.gson:gson:2.2.4")
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

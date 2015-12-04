@@ -1,39 +1,39 @@
 package org.zuinnote.examplemapreduce.TweetCount;
         
+
 import java.io.IOException;
 import java.util.*;
         
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.io.*;
-import org.apache.hadoop.mapreduce.*;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
-import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-       
-public class MyTweetDriver {
+import org.apache.hadoop.mapred.*;
+import org.apache.hadoop.util.*;
+/**
+* Author: Jörn Franke <jornfranke@gmail.com>
+*
+*/
+
+public class MyTweetDriver  {
 
        
         
  public static void main(String[] args) throws Exception {
-    Configuration conf = new Configuration();
+    JobConf conf = new JobConf(MyTweetDriver.class);
+    conf.setJobName("example-hadoop-job");
+    conf.setOutputKeyClass(Text.class);
+    conf.setOutputValueClass(IntWritable.class);
         
-        Job job = new Job(conf, "example-hadoop-job");
-    job.setJarByClass(MyTweetDriver.class);
-    job.setOutputKeyClass(Text.class);
-    job.setOutputValueClass(IntWritable.class);
+    conf.setMapperClass(MyTweetMapper.class);
+    conf.setReducerClass(MyTweetReducer.class);
         
-    job.setMapperClass(MyTweetMapper.class);
-    job.setReducerClass(MyTweetReducer.class);
+    conf.setInputFormat(TextInputFormat.class);
+    conf.setOutputFormat(TextOutputFormat.class);
         
-    job.setInputFormatClass(TextInputFormat.class);
-    job.setOutputFormatClass(TextOutputFormat.class);
+    FileInputFormat.addInputPath(conf, new Path(args[0]));
+    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
         
-    FileInputFormat.addInputPath(job, new Path(args[0]));
-    FileOutputFormat.setOutputPath(job, new Path(args[1]));
-        
-    job.waitForCompletion(true);
+    JobClient.runJob(conf);
  }
         
 }

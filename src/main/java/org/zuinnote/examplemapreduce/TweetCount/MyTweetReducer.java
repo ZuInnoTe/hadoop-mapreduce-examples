@@ -1,17 +1,24 @@
 package org.zuinnote.examplemapreduce.TweetCount;
- import java.io.IOException;
- import org.apache.hadoop.mapreduce.*;
+
+
+/**
+* Author: Jörn Franke <zuinnote@gmail.com>
+*
+*/
+import java.io.IOException;
+import org.apache.hadoop.mapred.*;
 import org.apache.hadoop.io.*;
 import java.util.*;
 
-public class MyTweetReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
+public class MyTweetReducer extends MapReduceBase implements Reducer<Text, IntWritable, Text, IntWritable> {
 
-    public void reduce(Text key, Iterable<IntWritable> values, Context context) 
-      throws IOException, InterruptedException {
-        int sum = 0;
-        for (IntWritable val : values) {
-            sum += val.get();
-        }
-        context.write(key, new IntWritable(sum));
-    }
- }
+   public void reduce(Text key, Iterator<IntWritable> values, OutputCollector<Text, IntWritable> output, Reporter reporter)
+     throws IOException {
+       int sum = 0;
+       while (values.hasNext()) {
+           sum += values.next().get();
+       }
+       output.collect(key, new IntWritable(sum));
+   }
+}
+
