@@ -1,15 +1,9 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
-<<<<<<< HEAD
 apply plugin: 'application'
-=======
-apply plugin: 'idea'
-
->>>>>>> aaaf0daba466bdbbf8ea0d0a323c4bbcf1e89894
 
 sourceCompatibility = 1.8
 
-sourceCompatibility = 1.8
 version = '1.0'
 jar {
     manifest {
