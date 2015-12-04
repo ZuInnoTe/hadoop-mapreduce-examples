@@ -38,17 +38,12 @@ sourceSets {
 }
 
 dependencies {
-<<<<<<< HEAD
+
    // hadoop lib for driver
      provided("org.apache.hadoop:hadoop-client:2.7.1")
     // hadoop common for map/reduce task
    provided("org.apache.hadoop:hadoop-common:2.7.1")
-=======
-    // hadoop lib for driver
-     compile("org.apache.hadoop:hadoop-client:2.7.0")
-    // hadoop common for map/reduce task
-   compile("org.apache.hadoop:hadoop-common:2.7.0")
->>>>>>> aaaf0daba466bdbbf8ea0d0a323c4bbcf1e89894
+
     // json library for tweets
     compile("com.google.code.gson:gson:2.2.4")
     testCompile group: 'junit', name: 'junit', version: '4.+'
